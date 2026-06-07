@@ -1,0 +1,208 @@
+{
+  "metadata": {
+    "method_name": "Dual-Signal SBFL",
+    "description": "SBFL-guided KB repair with Ochiai suspiciousness + sub-goal harvesting. Three sub-experiments: (A) perturbation calibration, (B) oracle model comparison, (C) KB completeness by hop depth.",
+    "parameters": {
+      "kb_extractor": "anthropic/claude-haiku-3-5",
+      "oracle_model_haiku": "anthropic/claude-3-haiku",
+      "oracle_model_gpt4o_mini": "openai/gpt-4o-mini",
+      "sbfl_rounds": 2,
+      "sbfl_k": 5,
+      "ochiai_metric": "Ochiai"
+    },
+    "sub_experiment_A": {
+      "mean_rho": 0.26052966840777925,
+      "n_valid": 4,
+      "n_total": 10,
+      "per_doc_rho": [
+        0.9074852129730301,
+        0.07418318309487704,
+        null,
+        null,
+        -0.06454972243679027,
+        null,
+        null,
+        null,
+        null,
+        0.125
+      ],
+      "per_doc_details": [
+        {
+          "n_clauses": 13,
+          "n_preds": 7,
+          "gt_perturbed": [
+            "is_green",
+            "visits",
+            "chases"
+          ],
+          "rho": 0.9074852129730301,
+          "pval": 0.004754564005304159
+        },
+        {
+          "n_clauses": 10,
+          "n_preds": 7,
+          "gt_perturbed": [
+            "is_white",
+            "is_quiet",
+            "is_furry"
+          ],
+          "rho": 0.07418318309487704,
+          "pval": 0.874408956280557
+        },
+        {
+          "n_clauses": 12,
+          "n_preds": 7,
+          "rho": null
+        },
+        {
+          "n_clauses": 20,
+          "n_preds": 6,
+          "rho": null
+        },
+        {
+          "n_clauses": 23,
+          "n_preds": 8,
+          "gt_perturbed": [
+            "chases",
+            "not_need",
+            "visits"
+          ],
+          "rho": -0.06454972243679027,
+          "pval": 0.8793050466564544
+        },
+        {
+          "n_clauses": 15,
+          "n_preds": 7,
+          "rho": null
+        },
+        {
+          "n_clauses": 15,
+          "n_preds": 10,
+          "rho": null
+        },
+        {
+          "n_clauses": 24,
+          "n_preds": 8,
+          "rho": null
+        },
+        {
+          "n_clauses": 9,
+          "n_preds": 6,
+          "rho": null
+        },
+        {
+          "n_clauses": 15,
+          "n_preds": 9,
+          "gt_perturbed": [
+            "is_blue",
+            "is_big",
+            "is_red"
+          ],
+          "rho": 0.125,
+          "pval": 0.7486445487540938
+        }
+      ]
+    },
+    "sub_experiment_B": {
+      "haiku": {
+        "accuracy": 0.575,
+        "correct": 23,
+        "total": 40,
+        "calibration_rho": -0.24879273479827657
+      },
+      "gpt4o_mini": {
+        "accuracy": 0.6,
+        "correct": 24,
+        "total": 40,
+        "calibration_rho": -0.1429159320910914
+      }
+    },
+    "sub_experiment_C": {
+      "by_depth": {
+        "1": {
+          "n_docs": 30,
+          "completeness_rate": 0.4666666666666667,
+          "sbfl_accuracy": 0.6333333333333333,
+          "sbfl_correct": 19,
+          "sbfl_total": 30
+        },
+        "2": {
+          "n_docs": 30,
+          "completeness_rate": 0.3333333333333333
+        },
+        "3": {
+          "n_docs": 30,
+          "completeness_rate": 0.3
+        }
+      }
+    },
+    "baseline": {
+      "accuracy": 0.825,
+      "correct": 33,
+      "total": 40
+    },
+    "total_cost_usd": 0.3908,
+    "total_runtime_s": 2696.3
+  },
+  "datasets": [
+    {
+      "dataset": "proofwriter_ruletaker_depth3",
+      "examples": [
+        {
+          "input": "Premises: The bear chases the rabbit. The bear is blue. The bear is green. The cat is cold. The rabbit chases the cat. The rabbit is nice. The rabbit visits the bear. If someone chases the cat and the cat visits the rabbit then they visit the cat. If someone visits the cat and the cat is cold then they chase the rabbit. If someone chases the rabbit then the rabbit visits the cat. If someone chases the cat and they chase the rabbit then the cat chases the bear. If someone eats the cat and they chase the bear then the bear eats the cat. If the cat chases the bear then the bear is blue.\nConclusion: The cat does not chase the rabbit.",
+          "output": "True",
+          "metadata_fold": "test",
+          "metadata_split": "test",
+          "metadata_is_calibration_doc": false,
+          "metadata_gold_label": "True",
+          "metadata_premises_text": "The bear chases the rabbit. The bear is blue. The bear is green. The cat is cold. The rabbit chases the cat. The rabbit is nice. The rabbit visits the bear. If someone chases the cat and the cat visits the rabbit then they visit the cat. If someone visits the cat and the cat is cold then they chase the rabbit. If someone chases the rabbit then the rabbit visits the cat. If someone chases the cat and they chase the rabbit then the cat chases the bear. If someone eats the cat and they chase the bear then the bear eats the cat. If the cat chases the bear then the bear is blue.",
+          "metadata_conclusion": "The cat does not chase the rabbit.",
+          "metadata_gold_fol_premises": "[]",
+          "metadata_gold_fol_conclusion": "",
+          "metadata_story_id": "",
+          "metadata_example_id": "0",
+          "metadata_task_type": "classification",
+          "metadata_fold_name": "proofwriter",
+          "predict_baseline": "True",
+          "predict_dual_sbfl": "True"
+        },
+        {
+          "input": "Premises: Bob is white. Dave is quiet. Fiona is furry. Harry is quiet. If Bob is rough then Bob is furry. All kind things are blue. If something is furry then it is rough. All rough, furry things are young. If something is young then it is kind. Rough, furry things are kind.\nConclusion: Dave is not white.",
+          "output": "True",
+          "metadata_fold": "test",
+          "metadata_split": "test",
+          "metadata_is_calibration_doc": false,
+          "metadata_gold_label": "True",
+          "metadata_premises_text": "Bob is white. Dave is quiet. Fiona is furry. Harry is quiet. If Bob is rough then Bob is furry. All kind things are blue. If something is furry then it is rough. All rough, furry things are young. If something is young then it is kind. Rough, furry things are kind.",
+          "metadata_conclusion": "Dave is not white.",
+          "metadata_gold_fol_premises": "[]",
+          "metadata_gold_fol_conclusion": "",
+          "metadata_story_id": "",
+          "metadata_example_id": "1",
+          "metadata_task_type": "classification",
+          "metadata_fold_name": "proofwriter",
+          "predict_baseline": "True",
+          "predict_dual_sbfl": "Unknown"
+        },
+        {
+          "input": "Premises: Anne is white. Charlie is quiet. Gary is young. Harry is blue. If something is smart and white then it is blue. All blue things are quiet. All furry, green things are blue. If something is smart then it is furry. If Anne is white then Anne is smart. Young, green things are blue. If Charlie is green and Charlie is young then Charlie is quiet. If something is blue then it is green.\nConclusion: Charlie is quiet.",
+          "output": "True",
+          "metadata_fold": "test",
+          "metadata_split": "test",
+          "metadata_is_calibration_doc": false,
+          "metadata_gold_label": "True",
+          "metadata_premises_text": "Anne is white. Charlie is quiet. Gary is young. Harry is blue. If something is smart and white then it is blue. All blue things are quiet. All furry, green things are blue. If something is smart then it is furry. If Anne is white then Anne is smart. Young, green things are blue. If Charlie is green and Charlie is young then Charlie is quiet. If something is blue then it is green.",
+          "metadata_conclusion": "Charlie is quiet.",
+          "metadata_gold_fol_premises": "[]",
+          "metadata_gold_fol_conclusion": "",
+          "metadata_story_id": "",
+          "metadata_example_id": "2",
+          "metadata_task_type": "classification",
+          "metadata_fold_name": "proofwriter",
+          "predict_baseline": "True",
+          "predict_dual_sbfl": "True"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "title": "SBFL Ochiai Formula, SWI-Prolog Tracing API, Logic-LM NL-to-FOL Prompting Format, FOLIO and ProofWriter Benchmark Schemas for Dual-Signal Fault Localization Pipeline",
+  "summary": "Comprehensive survey covering: (1) Ochiai SBFL formula ef/sqrt((ef+nf)*(ef+ep)) with Prolog predicate-to-coverage-matrix mapping and stratified direct/indirect fault classification; (2) SWI-Prolog prolog_trace_interception/4 and prolog_frame_attribute/3 APIs, with recommendation to use a pure Prolog meta-interpreter via pyswip for portable SLD coverage recording; (3) Logic-LM's actual few-shot prompt format for FOLIO (2-shot FOL with Unicode symbols and ::: glosses) and ProofWriter (1-shot LP with bool params and >>> rule syntax), plus self-refinement using solver error messages; (4) FOLIO benchmark: 1435 examples, train=1001/val=203/test=226, True/False/Unknown labels, Accuracy + SynV + EAcc metrics, custom FOL inference engine, JSONL format; (5) ProofWriter: D0-D5 depth variants (100k each), OWA recommended (three-label schema), Logic-LM uses 600 balanced OWA-D5 samples; (6) Self-Refine three-prompt structure with global NL critique vs. SBFL ranked scores; (7) LINC: 8-shot ICL, Prover9 FOL syntax (not Prolog), majority voting, three failure modes.",
+  "answer": "## Ochiai Formula and SBFL Coverage Matrix\n\nThe Ochiai suspiciousness formula is: Ochiai(s) = ef(s) / sqrt((ef(s) + nf(s)) * (ef(s) + ep(s))) [1, 13]. The four coverage variables are: ef = number of failed test cases that execute element s; ep = number of passing test cases that execute element s; nf = number of failed test cases that do NOT execute s; np = number of passing test cases that do NOT execute s [1, 13]. Critically, np is not used in Ochiai (unlike Tarantula). The score range is [0,1] where 1 means maximum suspicion. For comparison, Tarantula(s) = (ef/totalfailed) / ((ef/totalfailed) + (ep/totalpassed)) [1].\n\nFor the Prolog context mapping: predicate clauses are program elements; oracle queries (NL premise set + NL question) are test cases; proof success matching gold label = test pass; proof failure or wrong label = test fail [4]. Stratified coverage extends the binary matrix with three event types: direct_fail (call port fires, unify does NOT — head mismatch); subgoal_fail (unify fires, exit does NOT — head matched but subgoals failed); success (both unify and exit fire) [2].\n\n## SWI-Prolog Tracing API\n\nThe exact trace hook predicate is prolog_trace_interception(+Port, +Frame, +Choice, -Action) [2]. Port values relevant to stratified coverage are: call (predicate invoked), unify (neck instruction — head matching complete), exit (goal proved), fail (final failure) [2]. To continue without interference, return Action = continue [2]. Frame attributes accessible via prolog_frame_attribute(Frame, Key, Value) [3]: goal gives the goal term, predicate_indicator gives module:name/arity (preferred to avoid illegal terms), level gives recursion depth [3].\n\nRecommended approach: pure Prolog meta-interpreter loaded via pyswip's consult(), not trace hooks [2, 11]. The meta-interpreter records coverage(Pred/Arity, Event, QueryId) facts in the Prolog dynamic database. Events: unified (head matched), exit (subgoals proved), subgoal_fail, direct_fail. Python extracts coverage via list(prolog.query('coverage(Pred, Event, QId)')) [4]. The meta-interpreter pattern is: prove(true,_):-!. prove((A,B),Q):-!,prove(A,Q),prove(B,Q). prove(Goal,Q):- clause(Goal,Body), assertz(coverage(Name/Arity,unified,Q)), (prove(Body,Q) -> assertz(coverage(Name/Arity,exit,Q)) ; assertz(coverage(Name/Arity,subgoal_fail,Q)), fail). prove(Goal,Q):- \\+clause(Goal,_), assertz(coverage(Name/Arity,direct_fail,Q)), fail. [2, 11]\n\n## Logic-LM Prompting Format\n\nLogic-LM uses a three-stage pipeline: Problem Formulator (LLM + few-shot translates NL to symbolic), Symbolic Reasoner (deterministic solver), Result Interpreter [4]. Two symbolic formats are used depending on the dataset [4]: FOLIO uses a 2-shot FOL format with a grammar header (8 FOL operator definitions using Unicode symbols) and examples structured as Predicates / Premises / Conclusion sections with ::: separating formulas from English glosses [5]. ProofWriter uses a 1-shot LP format with a 4-step task description and examples structured as Predicates (bool params) / Facts / Rules (>>> syntax) / Query sections [6].\n\nPredicate naming: CamelCase for both formats (e.g., ChoralConductor(x), Dependent(x), Love(x,y)) [5]. Constants are lowercase atoms (miroslav, rina) or compound atoms (year1946) [5]. Logic-LM's self-refinement feeds solver error messages (NOT natural language critique) back to the LLM iteratively until no errors or max revisions reached [4]. The ProofWriter evaluation uses OWA depth-5 subset, randomly sampling 600 examples from the test set with balanced label distribution (200 each PROVED/DISPROVED/UNKNOWN) [4].\n\n## FOLIO Benchmark Protocol\n\nFOLIO contains 1,435 examples from 487 story sets, split as train=1001 / val=203 / test=226 [7]. Labels are True / False / Unknown [7]. Evaluation metrics: Accuracy for the logical reasoning task; SynV (syntactic validity — is the FOL formula parseable by the inference engine? GPT-4 achieves ~93.9% with few-shot) and EAcc (execution accuracy — does running the FOL through the inference engine produce the correct label? GPT-4 achieves ~63.8% with few-shot) for the NL-FOL translation task [7]. The inference engine is a custom FOL prover (Appendix G of the FOLIO paper) [7]. JSONL data format with fields: story_id, premises (NL list), conclusion (NL string), label, premises-FOL (FOL formula list), conclusion-FOL (FOL formula string) [7, 14]. Label distribution is not balanced — more True examples; models tend toward True predictions [7]. LINC uses the validation set with 182 examples (removing 22 with annotation errors) [9]. Expert annotators achieve 95.98% accuracy on FOLIO, non-experts achieve 61.82%, and GPT-4 falls ~31.82 percentage points below experts [7].\n\n## ProofWriter Benchmark Protocol\n\nProofWriter provides five depth variants: D0 (0 hops), D1 (at most 1 hop), D2 (at most 2 hops), D3 (at most 3 hops), D5 (at most 5 hops), each with 100k questions [8]. Two world assumption variants exist: CWA (Closed-World Assumption, labels True/False only) and OWA (Open-World Assumption, labels True/False/Unknown) [8]. Logic-LM uses OWA depth-5 test set with 600 randomly sampled examples, balanced across labels [4]. LINC uses OWA all-depths with 360 balanced samples: 50 per depth (0-5), 120 per label (True/False/Uncertain), 20 per depth×label combination [9]. Data fields per example: theory (list of NL sentences = facts + rules), question (NL conclusion to evaluate), answer (True/False/Unknown), proof (structured proof tree with intermediate steps) [8]. Under CWA, Prolog's \\+ (negation as failure) maps cleanly to ProofWriter semantics; under OWA, a three-way classifier is needed [8].\n\n## Self-Refine Baseline\n\nSelf-Refine uses three prompts: pgen (initial generation — few-shot examples of input→output), pfb (feedback — few-shot examples of input+output→feedback with actionable NL critique), and prefine (refinement — full history fed back) [10]. The algorithm: y0 = M(pgen||x); then iterate: fb = M(pfb||x||y), if stop: break, else y' = M(prefine||x||y0||fb0||...||y||fb) [10]. Stopping conditions: fixed maximum iterations OR model self-determines no further refinement needed [10]. Feedback is a global NL critique — actionable and specific, identifying concrete phrases to change [10]. Self-Refine improves outputs by ~20% absolute on average across 7 tasks [10]. The key structural differentiator from SBFL: Self-Refine gives unstructured holistic NL critique requiring the LLM to self-localize errors, while SBFL provides ranked per-predicate numeric suspiciousness scores enabling targeted repair [10].\n\n## LINC Baseline\n\nLINC uses 8-shot in-context learning with examples hand-picked from the FOLIO training set, using the same 8 examples for both FOLIO and ProofWriter evaluation [9]. The FOL representation uses Prover9 syntax (NOT Prolog LP syntax): universal quantification as 'all x. (p(x) -> q(x))', existential as 'exists x. (p(x))', with XML-style PREMISE and CONCLUSION tags wrapping each sentence [9]. The theorem prover is Prover9 (external FOL prover, not SWI-Prolog) [9]. LINC samples N translations from the LLM, runs each through Prover9, filters syntax errors, and takes majority vote on remaining valid outputs [9]. Three documented failure modes without feedback: L1 (FOL misses implicit commonsense not stated in premises), L2 (natural language nuance not capturable in first-order logic), L3 (predicate naming inconsistencies across premises, e.g., foursides vs. foursidedthings) [9]. Performance: GPT-4+LINC achieves 72.5% on FOLIO and ~92% on ProofWriter [9]. StarCoder+15.5B+LINC outperforms GPT-4+CoT on ProofWriter by 10% absolute [9].",
+  "sources": [
+    {
+      "index": 1,
+      "url": "https://arxiv.org/pdf/1803.09939",
+      "title": "An Empirical Study of Fault Localization Families and Their Combinations (Zou et al., 2019)",
+      "summary": "Confirmed exact Ochiai formula ef/sqrt((ef+nf)*(ef+ep)) and all four SBFL coverage matrix variable definitions. Compared Ochiai with DStar and Tarantula."
+    },
+    {
+      "index": 2,
+      "url": "https://www.swi-prolog.org/pldoc/man?predicate=prolog_trace_interception%2F4",
+      "title": "SWI-Prolog prolog_trace_interception/4 Official Documentation",
+      "summary": "Complete predicate signature, all port types (call, redo, unify, exit, fail, exception, cut_call, cut_exit), all action values including 'continue', and example code for recording trace events."
+    },
+    {
+      "index": 3,
+      "url": "https://www.swi-prolog.org/pldoc/man?predicate=prolog_frame_attribute%2F3",
+      "title": "SWI-Prolog prolog_frame_attribute/3 Official Documentation",
+      "summary": "All frame attribute keys: goal, predicate_indicator, level, clause, parent, argument(N). Critical for extracting predicate identity and recursion depth from trace hooks."
+    },
+    {
+      "index": 4,
+      "url": "https://arxiv.org/pdf/2305.12295",
+      "title": "LOGIC-LM: Empowering Large Language Models with Symbolic Solvers for Faithful Logical Reasoning (Pan et al., 2023)",
+      "summary": "Complete Logic-LM architecture: LP format for ProofWriter (Pyke), FOL format for FOLIO (Prover9). Self-refinement uses solver error messages. ProofWriter eval: OWA depth-5, 600 sampled examples."
+    },
+    {
+      "index": 5,
+      "url": "https://raw.githubusercontent.com/teacherpeterpan/Logic-LLM/main/models/prompts/FOLIO.txt",
+      "title": "Logic-LM FOLIO Prompt Template (Official GitHub)",
+      "summary": "Exact 2-shot prompt for FOLIO: grammar header with 8 FOL operator definitions, two examples with Predicates/Premises/Conclusion sections using Unicode FOL symbols, CamelCase predicates, and ::: English glosses."
+    },
+    {
+      "index": 6,
+      "url": "https://raw.githubusercontent.com/teacherpeterpan/Logic-LLM/main/models/prompts/ProofWriter.txt",
+      "title": "Logic-LM ProofWriter Prompt Template (Official GitHub)",
+      "summary": "Exact 1-shot prompt for ProofWriter: 4-step task description, one example with Predicates (bool params P($x,bool)), Facts (Entity, True), Rules (>>> syntax), Query sections."
+    },
+    {
+      "index": 7,
+      "url": "https://arxiv.org/html/2209.00840v2",
+      "title": "FOLIO: Natural Language Reasoning with First-Order Logic (Han et al., 2022)",
+      "summary": "FOLIO dataset: 1435 examples, 487 stories, train=1001/val=203/test=226. Labels True/False/Unknown. Metrics: Accuracy, SynV (~93.9% GPT-4), EAcc (~63.8% GPT-4). Custom FOL inference engine. Expert accuracy 95.98%."
+    },
+    {
+      "index": 8,
+      "url": "https://aclanthology.org/2021.findings-acl.317.pdf",
+      "title": "ProofWriter: Generating Implications, Proofs, and Abductive Statements over Natural Language (Tafjord et al., 2021)",
+      "summary": "ProofWriter D0-D5 depth variants (100k questions each), CWA/OWA semantics, True/False/Unknown labels, data format fields (theory, question, answer, proof), templatic NL surface form."
+    },
+    {
+      "index": 9,
+      "url": "https://aclanthology.org/2023.emnlp-main.313.pdf",
+      "title": "LINC: A Neurosymbolic Approach for Logical Reasoning (Olausson et al., 2023)",
+      "summary": "LINC: 8-shot ICL from FOLIO training set, Prover9 FOL syntax with XML PREMISE/CONCLUSION tags, majority voting. FOLIO: 182 examples. ProofWriter: 360 balanced OWA samples. Three failure modes L1/L2/L3. GPT-4+LINC: 72.5% FOLIO, ~92% ProofWriter."
+    },
+    {
+      "index": 10,
+      "url": "https://openreview.net/pdf?id=S37hOerQLB",
+      "title": "SELF-REFINE: Iterative Refinement with Self-Feedback (Madaan et al., 2023)",
+      "summary": "Three-prompt structure (pgen, pfb, prefine). Full algorithm with stopping conditions. Feedback is actionable NL critique. ~20% average improvement across 7 tasks. Key differentiator from SBFL: holistic NL critique vs. ranked numeric scores."
+    },
+    {
+      "index": 11,
+      "url": "https://swi-prolog.discourse.group/t/example-of-prolog-trace-interception-4/4458",
+      "title": "Example of prolog_trace_interception/4 — SWI-Prolog Discourse Forum",
+      "summary": "Practical example confirming port firing sequence: call -> unify -> exit for successful predicates. Validates stratification logic for the meta-interpreter approach."
+    },
+    {
+      "index": 12,
+      "url": "https://github.com/teacherpeterpan/Logic-LLM",
+      "title": "teacherpeterpan/Logic-LLM GitHub Repository",
+      "summary": "Repository structure confirming models/prompts/ directory with per-dataset .txt prompt files. logic_program.py shows [[PROBLEM]]/[[QUESTION]] placeholder substitution."
+    },
+    {
+      "index": 13,
+      "url": "https://ieeexplore.ieee.org/iel7/6287639/8948470/08954719.pdf",
+      "title": "Enhancing Spectrum-Based Fault Localization Using Fault Influence",
+      "summary": "Secondary confirmation of ef, ep, nf, np definitions in SBFL coverage matrix for Ochiai and related formulas."
+    },
+    {
+      "index": 14,
+      "url": "https://github.com/Yale-LILY/FOLIO",
+      "title": "Yale-LILY/FOLIO GitHub Repository",
+      "summary": "FOLIO data directory: data/v0.0/ contains folio-validation.jsonl. Confirms JSONL format and data structure including conclusion-FOL field."
+    }
+  ],
+  "follow_up_questions": [
+    "For stratified SBFL: when a predicate has both direct unification failures and subgoal failures across different oracle queries, should they be combined into a single Ochiai score or reported as separate ranked lists with different remediation actions (rewrite head vs. rewrite body)?",
+    "Since Pyke (used by Logic-LM for ProofWriter) is deprecated and unmaintained, what is the best alternative LP engine (SWI-Prolog, clingo/ASP) for replicating Logic-LM's deductive reasoning module with OWA three-valued semantics?",
+    "FOLIO's EAcc metric requires a custom FOL inference engine — what is the exact API of the engine described in FOLIO Appendix G, and how should a Prolog-based EAcc implementation handle OWA Unknown semantics given Prolog's default closed-world negation-as-failure?"
+  ]
+}

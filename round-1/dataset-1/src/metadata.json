@@ -1,0 +1,24 @@
+{
+  "datasets": [
+    {
+      "name": "FOLIO",
+      "source": "HannaAbiAkl/FOLIO-KR",
+      "original_source": "yale-nlp/FOLIO (gated)",
+      "note": "HannaAbiAkl/FOLIO-KR mirrors yale-nlp/FOLIO with additional KR notations",
+      "paper": "https://arxiv.org/abs/2209.00840",
+      "rows": 1204,
+      "metadata_fold": "folio"
+    },
+    {
+      "name": "ProofWriter-NL (RuleTaker depth-3ext-NatLang)",
+      "source": "tasksource/ruletaker",
+      "original_source": "allenai/ruletaker",
+      "paper": "https://arxiv.org/abs/2012.13048",
+      "rows": 300,
+      "metadata_fold": "proofwriter",
+      "config": "depth-3ext-NatLang"
+    }
+  ],
+  "total_rows": 1504,
+  "calibration_count": 20
+}

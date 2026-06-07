@@ -1,0 +1,144 @@
+[
+  {
+    "id": "folio_train_0",
+    "premises_text": "Tyga is a rapper. Rappers release rap albums. Tyga released the Well Done 3 album. Rappers are not opera singers.",
+    "conclusion": "Well Done 3 is worth listening to.",
+    "gold_label": "Unknown",
+    "gold_fol_premises": [
+      "IsRapper(tyga)",
+      "∀x ∀y ((IsRapper(x) ∧ ReleasedAlbum(x, y)) → IsRapAlbum(y))",
+      "ReleasedAlbum(tyga, wellDone3)",
+      "∀x (IsRapper(x) → ¬IsOperaSinger(x))"
+    ],
+    "gold_fol_conclusion": "IsWorthListening(wellDone3)",
+    "split": "train",
+    "is_calibration_doc": false,
+    "metadata_fold": "folio"
+  },
+  {
+    "id": "folio_train_1",
+    "premises_text": "All people in this tech company who are consistent and enjoy sticking to their regular routines do not like surprises. People in this tech company who wear the same flannel shirts every day are consistent and enjoy sticking to their regular routines. People in this tech company who do not like shopping for clothes wear the same flannel shirts every day. Old people living in stable homes do not like surprises. People in this tech company who have very high energy and are impulsive like surprises. Mike works in this tech company. If Mike is not a person who wears the same flannel shirts every day, has very high energy, and is impulsive, then Mike either is very consistent and enjoys sticking to his regular routines or does not like surprises.",
+    "conclusion": "Mike is an old person living in a stable home.",
+    "gold_label": "Unknown",
+    "gold_fol_premises": [
+      "∀x (InThisTechCompany(x) ∧ Consistent(x) ∧ StickTo(x, theirRegularRoutine) → ¬Like(x, surprise))",
+      "∀x (InThisTechCompany(x) ∧ ∃y (flannelShirt(y) ∧ WearEveryday(x, y)) → Consistent(x) ∧ StickTo(x, theirRegularRoutine))",
+      "∀x (InThisTechCompany(x) ∧ ¬LikeShoppingFor(x, clothes) → ∃y (flannelShirt(y) ∧ WearEveryday(x, y)))",
+      "∀x (InThisTechCompany(x) ∧ Old(x) ∧ LiveIn(x, stableHome) → ¬Like(x, surprise))",
+      "∀x (InThisTechCompany(x) ∧ Have(x, highEnergy) ∧ Impulsive(x) → ¬Like(x, surprise))",
+      "InThisTechCompany(mike)",
+      "¬(∃y (flannelShirt(y) ∧ WearEveryday(x, y)) ∧ Have(mike, highEnergy) ∧ Impulsive(mike)) → (Consistent(mike) ∧ StickTo(mike, theirRegularRoutine)) ⊕ ¬Like(mike, surprise)"
+    ],
+    "gold_fol_conclusion": "Old(mike) ∧ LiveIn(mike, stableHome)",
+    "split": "train",
+    "is_calibration_doc": false,
+    "metadata_fold": "folio"
+  },
+  {
+    "id": "folio_train_2",
+    "premises_text": "No trick-shot artist in Yale's varsity team struggles with half court shots. Everyone on Yale's varsity team is someone who struggles with half court shots or who successfully shoots a high percentage of 3-pointers. Everyone on Yale's varsity team who successfully shoots a high percentage of 3-pointers is solid at shooting 2-pointers. No one on Yale's varsity team who is solid at shooting 2-pointers is bad at mid-range shots. Jack is on Yale's varsity team, and he is either a trick-shot artist or he successfully shoots a high percentage of 3-pointers.",
+    "conclusion": "Jack is solid at shooting 2-pointers or bad at mid-range shots.",
+    "gold_label": "True",
+    "gold_fol_premises": [
+      "∀x ((In(x, yaleSVarsityTeam) ∧ TrickShotArtist(x)) → ¬StruggleAt(x, halfCourtShot))",
+      "∀x (In(x, yaleSVarsityTeam) → (StruggleAt(x, halfCourtShot) ∨ GoodAt(x, threes)))",
+      "∀x ((In(x, yaleSVarsityTeam) ∧ GoodAt(x, threes)) → GoodAt(x, twos))",
+      "∀x ((In(x, yaleSVarsityTeam) ∧ GoodAt(x, twos)) → BadAt(x, midRangeShot))",
+      "In(jack, yaleSVarsityTeam) ∧ (TrickShotArtist(jack) ⊕  GoodAt(jack, threes))"
+    ],
+    "gold_fol_conclusion": "GoodAt(jack, twos) ∨ BadAt(jack, midRangeShot)",
+    "split": "train",
+    "is_calibration_doc": false,
+    "metadata_fold": "folio"
+  },
+  {
+    "id": "folio_train_3",
+    "premises_text": "Ableton has an office in Germany. Ableton has an office in the USA. USA and Germany are different countries. Any company that has offices in different countries is a multinational company. Ableton makes music software.",
+    "conclusion": "Ableton makes AI software.",
+    "gold_label": "Unknown",
+    "gold_fol_premises": [
+      "OfficeIn(ableton, germany)",
+      "OfficeIn(ableton, unitedStates)",
+      "¬SameCountry(germany, unitedStates)",
+      "∀x ∀y ∀z (OfficeIn(x, y) ∧ OfficeIn(x, z) ∧ (¬SameCountry(y, z)) → MultinationalCompany(x))",
+      "MakesMusicSoftware(ableton)"
+    ],
+    "gold_fol_conclusion": "MakesAISoftware(ableton)",
+    "split": "train",
+    "is_calibration_doc": false,
+    "metadata_fold": "folio"
+  },
+  {
+    "id": "folio_train_4",
+    "premises_text": "All kids are young. All toddlers are kids. If someone is young, then they are not elderly. All pirates are seafarers. If Nancy is not a pirate, then Nancy is young. If Nancy is not a toddler, then Nancy is a seafarer.",
+    "conclusion": "Nancy is either both a pirate and a toddler, or neither a pirate nor a toddler.",
+    "gold_label": "False",
+    "gold_fol_premises": [
+      "∀x (Kid(x) → Young(x))",
+      "∀x (Toddler(x) → Kid(x))",
+      "∀x (Young(x) → ¬Elderly(x))",
+      "∀x (Pirate(x) → Seafarer(x))",
+      "¬Pirate(nancy) → Young(nancy)",
+      "¬Toddler(nancy) → Seafarer(nancy)"
+    ],
+    "gold_fol_conclusion": "¬(Pirate(nancy) ⊕ Toddler(nancy))",
+    "split": "train",
+    "is_calibration_doc": false,
+    "metadata_fold": "folio"
+  },
+  {
+    "id": "proofwriter_0",
+    "premises_text": "The bear chases the rabbit. The bear is blue. The bear is green. The cat is cold. The rabbit chases the cat. The rabbit is nice. The rabbit visits the bear. If someone chases the cat and the cat visits the rabbit then they visit the cat. If someone visits the cat and the cat is cold then they chase the rabbit. If someone chases the rabbit then the rabbit visits the cat. If someone chases the cat and they chase the rabbit then the cat chases the bear. If someone eats the cat and they chase the bear then the bear eats the cat. If the cat chases the bear then the bear is blue.",
+    "conclusion": "The cat does not chase the rabbit.",
+    "gold_label": "True",
+    "gold_fol_premises": [],
+    "gold_fol_conclusion": "",
+    "split": "test",
+    "is_calibration_doc": false,
+    "metadata_fold": "proofwriter"
+  },
+  {
+    "id": "proofwriter_1",
+    "premises_text": "Bob is white. Dave is quiet. Fiona is furry. Harry is quiet. If Bob is rough then Bob is furry. All kind things are blue. If something is furry then it is rough. All rough, furry things are young. If something is young then it is kind. Rough, furry things are kind.",
+    "conclusion": "Dave is not white.",
+    "gold_label": "True",
+    "gold_fol_premises": [],
+    "gold_fol_conclusion": "",
+    "split": "test",
+    "is_calibration_doc": false,
+    "metadata_fold": "proofwriter"
+  },
+  {
+    "id": "proofwriter_2",
+    "premises_text": "Anne is white. Charlie is quiet. Gary is young. Harry is blue. If something is smart and white then it is blue. All blue things are quiet. All furry, green things are blue. If something is smart then it is furry. If Anne is white then Anne is smart. Young, green things are blue. If Charlie is green and Charlie is young then Charlie is quiet. If something is blue then it is green.",
+    "conclusion": "Charlie is quiet.",
+    "gold_label": "True",
+    "gold_fol_premises": [],
+    "gold_fol_conclusion": "",
+    "split": "test",
+    "is_calibration_doc": false,
+    "metadata_fold": "proofwriter"
+  },
+  {
+    "id": "proofwriter_3",
+    "premises_text": "The cat chases the dog. The cat is big. The cat sees the dog. The dog chases the tiger. The dog is kind. The dog needs the cat. The dog sees the cat. The dog sees the tiger. The tiger chases the cat. The tiger is big. The tiger needs the dog. The tiger sees the dog. If the dog is big then the dog sees the tiger. If something is round and it sees the tiger then it sees the dog. If the dog chases the cat and the cat chases the dog then the dog needs the tiger. If the tiger needs the cat and the cat needs the dog then the dog chases the cat. If something chases the tiger then the tiger needs the cat. If something needs the tiger and it chases the cat then it sees the cat. If something chases the cat then the cat needs the dog. If something is round and it sees the tiger then the tiger needs the cat.",
+    "conclusion": "The dog chases the cat.",
+    "gold_label": "True",
+    "gold_fol_premises": [],
+    "gold_fol_conclusion": "",
+    "split": "test",
+    "is_calibration_doc": false,
+    "metadata_fold": "proofwriter"
+  },
+  {
+    "id": "proofwriter_4",
+    "premises_text": "The bear is kind. The bear does not need the cat. The bear visits the tiger. The cat chases the bear. The cat chases the tiger. The squirrel chases the bear. The squirrel does not need the bear. The squirrel needs the cat. The squirrel does not need the tiger. The squirrel visits the bear. The squirrel visits the cat. The tiger chases the cat. The tiger chases the squirrel. The tiger is rough. The tiger visits the cat. If something needs the squirrel and it is blue then it chases the squirrel. If something is kind then it chases the cat. If something is rough then it is blue. Blue things are red. If something needs the cat then it is rough. If something chases the tiger then it needs the bear. If the cat visits the squirrel and the cat does not need the tiger then the squirrel chases the cat. If something is nice and it chases the tiger then it needs the squirrel.",
+    "conclusion": "The squirrel is red.",
+    "gold_label": "True",
+    "gold_fol_premises": [],
+    "gold_fol_conclusion": "",
+    "split": "test",
+    "is_calibration_doc": false,
+    "metadata_fold": "proofwriter"
+  }
+]

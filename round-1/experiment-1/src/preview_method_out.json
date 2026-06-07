@@ -1,0 +1,81 @@
+{
+  "metadata": {
+    "method_name": "dual_signal_sbfl",
+    "description": "Dual-signal SBFL (Ochiai + sub-goal harvesting) for Prolog KB repair on FOLIO",
+    "model": "meta-llama/llama-3.1-8b-instruct",
+    "parameters": {
+      "n_oracle_queries": 5,
+      "n_repair_rounds": 1,
+      "k_repair_targets": 3
+    },
+    "summary": {
+      "n_examples": 3,
+      "total_cost_usd": 0.0019,
+      "total_llm_calls": 69,
+      "avg_repairs_per_example": 2.333,
+      "dual_sbfl_accuracy": 0.3333,
+      "oneshot_accuracy": 0.0,
+      "cot_accuracy": 0.3333,
+      "selfrefine_accuracy": 0.3333,
+      "flat_sbfl_accuracy": 0.3333
+    }
+  },
+  "datasets": [
+    {
+      "dataset": "folio_validation",
+      "examples": [
+        {
+          "input": "People in this club who perform in school talent shows often attend and are very engaged with school events.\nPeople in this club either perform in school talent shows often or are inactive and disinte...",
+          "output": "Uncertain",
+          "predict_dual_sbfl": "Uncertain",
+          "predict_oneshot": "True",
+          "predict_cot": "Uncertain",
+          "predict_selfrefine": "Uncertain",
+          "predict_flat_sbfl": "Uncertain",
+          "metadata_story_id": "380",
+          "metadata_conclusion": "Bonnie performs in school talent shows often.",
+          "metadata_conclusion_fol": "InThisClub(bonnie) ∧ (Perform(bonnie, schoolTalentShow))",
+          "metadata_num_repairs": "2",
+          "metadata_kb_size": "49",
+          "metadata_ochiai_top5": "[]",
+          "metadata_subgoal_top5": "[[\"is_chaperones_high_school_dances(_25556)\", 1], [\"is_inactive_and_disinterested_community_member(_25556)\", 1]]",
+          "metadata_cumulative_cost_usd": "0.0007"
+        },
+        {
+          "input": "People in this club who perform in school talent shows often attend and are very engaged with school events.\nPeople in this club either perform in school talent shows often or are inactive and disinte...",
+          "output": "True",
+          "predict_dual_sbfl": "Uncertain",
+          "predict_oneshot": "Uncertain",
+          "predict_cot": "Uncertain",
+          "predict_selfrefine": "Uncertain",
+          "predict_flat_sbfl": "Uncertain",
+          "metadata_story_id": "380",
+          "metadata_conclusion": "If Bonnie is either both a young child or teenager who wishes to further her academic career and educational opportunities and chaperones high school dances or neither is a young child nor teenager wh...",
+          "metadata_conclusion_fol": "¬((YoungChildren(bonnie) ⊕ Teenager(bonnie)) ∧ WishToFurther(bonnie, academicCareer)) ⊕ Chaperone(bonnie, highSchoolDance)) → (Studen(x) ∧ AttendSchool(x)) ⊕ (YoungChildren(bonnie) ⊕ Teenager(bonnie))...",
+          "metadata_num_repairs": "3",
+          "metadata_kb_size": "38",
+          "metadata_ochiai_top5": "[]",
+          "metadata_subgoal_top5": "[[\"attends_school(_3122)\", 1], [\"chaperones_high_school_dances(_3122)\", 1], [\"is_not_a_student(_3122)\", 1]]",
+          "metadata_cumulative_cost_usd": "0.0013"
+        },
+        {
+          "input": "People in this club who perform in school talent shows often attend and are very engaged with school events.\nPeople in this club either perform in school talent shows often or are inactive and disinte...",
+          "output": "False",
+          "predict_dual_sbfl": "Uncertain",
+          "predict_oneshot": "Uncertain",
+          "predict_cot": "Uncertain",
+          "predict_selfrefine": "Uncertain",
+          "predict_flat_sbfl": "Uncertain",
+          "metadata_story_id": "380",
+          "metadata_conclusion": "If Bonnie either chaperones high school dances or, if she does not, she performs in school talent shows often, then Bonnie is both a young child or teenager who wishes to further her academic career a...",
+          "metadata_conclusion_fol": "(Chaperone(bonnie, highSchoolDance) ⊕ Perform(bonnie, schoolTalentShow)) → (YoungChildren(bonnie) ⊕ Teenager(bonnie)) ∧ WishToFurther(bonnie, academicCareer)) ∧ (InActive(bonnie) ∧ Disinterested(bonni...",
+          "metadata_num_repairs": "2",
+          "metadata_kb_size": "20",
+          "metadata_ochiai_top5": "[[\"is_very_engaged_with_school_events/1\", 0.0]]",
+          "metadata_subgoal_top5": "[[\"is_inactive_and_disinterested(bonnie)\", 1]]",
+          "metadata_cumulative_cost_usd": "0.0019"
+        }
+      ]
+    }
+  ]
+}

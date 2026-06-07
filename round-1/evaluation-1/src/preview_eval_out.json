@@ -1,0 +1,233 @@
+{
+  "metadata": {
+    "evaluation_name": "Dual-Signal SBFL vs Baselines on FOLIO",
+    "description": "End-to-end statistical evaluation of Prolog KB repair methods",
+    "n_examples": 150,
+    "n_calibration_examples": 10,
+    "total_cost_usd": 0.7315,
+    "method_results": {
+      "one_shot": {
+        "accuracy": 0.2,
+        "accuracy_1hop": 0.29,
+        "accuracy_2hop": 0.02,
+        "accuracy_3hop": 0.0,
+        "hallucination_rate": 0.0116,
+        "mean_llm_calls": 2.0,
+        "total_cost_usd": 0.0563,
+        "atomic_precision_strict": 0.7681,
+        "atomic_recall_strict": 0.4395,
+        "atomic_precision_fuzzy": 0.9933,
+        "atomic_recall_fuzzy": 0.6008
+      },
+      "cot": {
+        "accuracy": 0.32,
+        "accuracy_1hop": 0.4,
+        "accuracy_2hop": 0.16,
+        "accuracy_3hop": 0.0,
+        "hallucination_rate": 1.0,
+        "mean_llm_calls": 1.0,
+        "total_cost_usd": 0.0456,
+        "atomic_precision_strict": 0.0,
+        "atomic_recall_strict": 0.0,
+        "atomic_precision_fuzzy": 0.0,
+        "atomic_recall_fuzzy": 0.0
+      },
+      "self_refine": {
+        "accuracy": 0.1867,
+        "accuracy_1hop": 0.28,
+        "accuracy_2hop": 0.0,
+        "accuracy_3hop": 0.0,
+        "hallucination_rate": 0.0276,
+        "mean_llm_calls": 4.97,
+        "total_cost_usd": 0.2177,
+        "atomic_precision_strict": 0.7353,
+        "atomic_recall_strict": 0.4446,
+        "atomic_precision_fuzzy": 0.9914,
+        "atomic_recall_fuzzy": 0.6334
+      },
+      "flat_sbfl": {
+        "accuracy": 0.1867,
+        "accuracy_1hop": 0.28,
+        "accuracy_2hop": 0.0,
+        "accuracy_3hop": 0.0,
+        "hallucination_rate": 0.0212,
+        "mean_llm_calls": 7.43,
+        "total_cost_usd": 0.2079,
+        "atomic_precision_strict": 0.7314,
+        "atomic_recall_strict": 0.4744,
+        "atomic_precision_fuzzy": 0.985,
+        "atomic_recall_fuzzy": 0.6831
+      },
+      "dual_sbfl": {
+        "accuracy": 0.1933,
+        "accuracy_1hop": 0.29,
+        "accuracy_2hop": 0.0,
+        "accuracy_3hop": 0.0,
+        "hallucination_rate": 0.0156,
+        "mean_llm_calls": 7.05,
+        "total_cost_usd": 0.1993,
+        "atomic_precision_strict": 0.7149,
+        "atomic_recall_strict": 0.4713,
+        "atomic_precision_fuzzy": 0.9913,
+        "atomic_recall_fuzzy": 0.6899
+      }
+    },
+    "bootstrap_cis": {
+      "dual_sbfl_vs_one_shot": {
+        "lower": -0.033333333333333354,
+        "upper": 0.020000000000000018,
+        "n_resamples": 10000
+      },
+      "dual_sbfl_vs_self_refine": {
+        "lower": -0.013333333333333336,
+        "upper": 0.033333333333333326,
+        "n_resamples": 10000
+      },
+      "dual_sbfl_vs_flat_sbfl": {
+        "lower": -0.013333333333333336,
+        "upper": 0.026666666666666686,
+        "n_resamples": 10000
+      },
+      "dual_sbfl_vs_cot": {
+        "lower": -0.19333333333333333,
+        "upper": -0.06666666666666665,
+        "n_resamples": 10000
+      }
+    },
+    "effect_sizes": {
+      "dual_sbfl_vs_one_shot": {
+        "cohens_h": -0.016772950088627003
+      },
+      "dual_sbfl_vs_self_refine": {
+        "cohens_h": 0.01699434568248359
+      },
+      "dual_sbfl_vs_flat_sbfl": {
+        "cohens_h": 0.01699434568248359
+      },
+      "dual_sbfl_vs_cot": {
+        "cohens_h": -0.29200616544527147
+      }
+    },
+    "mcnemar_pvalues": {
+      "dual_sbfl_vs_one_shot": 1.0,
+      "dual_sbfl_vs_self_refine": 1.0,
+      "dual_sbfl_vs_flat_sbfl": 1.0,
+      "dual_sbfl_vs_cot": 0.0005320055051392103
+    },
+    "oracle_calibration_rho": -0.1667,
+    "oracle_calibration_pvalue": 1.0,
+    "oracle_calibration_valid": false,
+    "figures": {
+      "fig1_accuracy": "iVBORw0KGgoAAAANSUhEUgAABdwAAAOECAYAAAC7OPPEAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjksIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvJkbTWQAAAAlwSFlzAAAXEgAAFxIBZ5/SUgAA0jJJREFUeJzs3XeUVdXdP+DPANKbBURE...",
+      "fig2_hallucination": "iVBORw0KGgoAAAANSUhEUgAABdwAAAOECAYAAAC7OPPEAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjksIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvJkbTWQAAAAlwSFlzAAAXEgAAFxIBZ5/SUgAAytFJREFUeJzs3XecVNX9P/7X0KtgQRAR...",
+      "fig3_efficiency": "iVBORw0KGgoAAAANSUhEUgAABLAAAAOECAYAAACxbcj6AAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjksIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvJkbTWQAAAAlwSFlzAAAXEgAAFxIBZ5/SUgAA4RZJREFUeJzs3Xd4VNXWx/HfSSchCYQW...",
+      "fig4_hop_depth": "iVBORw0KGgoAAAANSUhEUgAABLAAAAOECAYAAACxbcj6AAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjksIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvJkbTWQAAAAlwSFlzAAAXEgAAFxIBZ5/SUgAAv4FJREFUeJzs3Wd4FdX+9vF7pxcgQEKV...",
+      "fig5_oracle_calibration": "iVBORw0KGgoAAAANSUhEUgAAA4QAAALuCAYAAAD2VtizAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjksIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvJkbTWQAAAAlwSFlzAAAXEgAAFxIBZ5/SUgAApYNJREFUeJzs3Xd4FOXexvF70xNSaCH0..."
+    }
+  },
+  "metrics_agg": {
+    "dual_sbfl_accuracy": 0.1933,
+    "one_shot_accuracy": 0.2,
+    "self_refine_accuracy": 0.1867,
+    "flat_sbfl_accuracy": 0.1867,
+    "cot_accuracy": 0.32,
+    "dual_vs_oneshot_delta": -0.0067,
+    "oracle_calibration_rho": -0.1667,
+    "oracle_calibration_valid": 0.0,
+    "dual_sbfl_hallucination_rate": 0.0156,
+    "one_shot_hallucination_rate": 0.0116,
+    "hallucination_reduction_pct": -33.85,
+    "dual_sbfl_mean_llm_calls": 7.05,
+    "self_refine_mean_llm_calls": 4.97,
+    "n_examples": 150,
+    "total_cost_usd": 0.7315
+  },
+  "datasets": [
+    {
+      "dataset": "tasksource/proofwriter",
+      "examples": [
+        {
+          "input": "Charlie is cold.",
+          "output": "entailed",
+          "metadata_premises": "Charlie is blue. | Charlie is cold. | Dave is quiet.",
+          "metadata_hop_depth": 1,
+          "metadata_index": 0,
+          "predict_one_shot": "cold(charlie)",
+          "eval_one_shot_correct": 1.0,
+          "eval_one_shot_llm_calls": 2.0,
+          "eval_one_shot_hallucination": 0.0,
+          "predict_cot": "To determine if the given conclusion \"Charlie is cold\" follows from the premises, let's analyze the information step by step:\n\n1. The first premise states that \"Charlie is blue.\" This information is n...",
+          "eval_cot_correct": 1.0,
+          "eval_cot_llm_calls": 1.0,
+          "eval_cot_hallucination": 1.0,
+          "predict_self_refine": "cold(charlie)",
+          "eval_self_refine_correct": 1.0,
+          "eval_self_refine_llm_calls": 5.0,
+          "eval_self_refine_hallucination": 0.0,
+          "predict_flat_sbfl": "cold(charlie)",
+          "eval_flat_sbfl_correct": 1.0,
+          "eval_flat_sbfl_llm_calls": 9.0,
+          "eval_flat_sbfl_hallucination": 0.0,
+          "predict_dual_sbfl": "cold(charlie)",
+          "eval_dual_sbfl_correct": 1.0,
+          "eval_dual_sbfl_llm_calls": 8.0,
+          "eval_dual_sbfl_hallucination": 0.0
+        },
+        {
+          "input": "Charlie is not cold.",
+          "output": "not_entailed",
+          "metadata_premises": "Charlie is blue. | Charlie is cold. | Dave is quiet.",
+          "metadata_hop_depth": 1,
+          "metadata_index": 1,
+          "predict_one_shot": "\\+cold(charlie)",
+          "eval_one_shot_correct": 1.0,
+          "eval_one_shot_llm_calls": 2.0,
+          "eval_one_shot_hallucination": 0.0,
+          "predict_cot": "To determine whether the given conclusion \"Charlie is not cold\" follows from the premises, let's analyze the information step by step:\n\n1. The first premise states that \"Charlie is blue.\" This does no...",
+          "eval_cot_correct": 1.0,
+          "eval_cot_llm_calls": 1.0,
+          "eval_cot_hallucination": 1.0,
+          "predict_self_refine": "\\+cold(charlie)",
+          "eval_self_refine_correct": 1.0,
+          "eval_self_refine_llm_calls": 5.0,
+          "eval_self_refine_hallucination": 0.0,
+          "predict_flat_sbfl": "\\+cold(charlie)",
+          "eval_flat_sbfl_correct": 1.0,
+          "eval_flat_sbfl_llm_calls": 9.0,
+          "eval_flat_sbfl_hallucination": 0.0,
+          "predict_dual_sbfl": "\\+cold(charlie)",
+          "eval_dual_sbfl_correct": 1.0,
+          "eval_dual_sbfl_llm_calls": 9.0,
+          "eval_dual_sbfl_hallucination": 0.0
+        },
+        {
+          "input": "Dave is cold.",
+          "output": "unknown",
+          "metadata_premises": "Charlie is blue. | Charlie is cold. | Dave is quiet.",
+          "metadata_hop_depth": 1,
+          "metadata_index": 2,
+          "predict_one_shot": "\\+cold(dave)",
+          "eval_one_shot_correct": 0.0,
+          "eval_one_shot_llm_calls": 2.0,
+          "eval_one_shot_hallucination": 0.0,
+          "predict_cot": "To determine whether the given conclusion \"Dave is cold\" follows from the premises, let's analyze the information step by step:\n\n1. The premises state that \"Charlie is blue\" and \"Charlie is cold\". Thi...",
+          "eval_cot_correct": 0.0,
+          "eval_cot_llm_calls": 1.0,
+          "eval_cot_hallucination": 1.0,
+          "predict_self_refine": "\\+cold(dave)",
+          "eval_self_refine_correct": 0.0,
+          "eval_self_refine_llm_calls": 5.0,
+          "eval_self_refine_hallucination": 0.0,
+          "predict_flat_sbfl": "\\+cold(dave)",
+          "eval_flat_sbfl_correct": 0.0,
+          "eval_flat_sbfl_llm_calls": 9.0,
+          "eval_flat_sbfl_hallucination": 0.0,
+          "predict_dual_sbfl": "\\+cold(dave)",
+          "eval_dual_sbfl_correct": 0.0,
+          "eval_dual_sbfl_llm_calls": 8.0,
+          "eval_dual_sbfl_hallucination": 0.0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "title": "FOLIO + ProofWriter-NL Dataset for Dual-Signal SBFL Evaluation",
+  "layman_summary": "FOLIO (NL premises with gold logic formulas) and ProofWriter-NL (multi-hop deduction) combined into one evaluation dataset for testing a fault-localisation method using natural language and formal logic signals.",
+  "summary": "## Dataset Artifact: FOLIO + ProofWriter-NL for Dual-Signal SBFL Evaluation\n\n### Datasets Included\n\n**Dataset 1 — FOLIO (folio)**\n- Source: HannaAbiAkl/FOLIO-KR on HuggingFace (mirrors gated yale-nlp/FOLIO; same data with additional KR notations)\n- Paper: Han et al., EMNLP 2024, arXiv:2209.00840\n- 1,204 examples across train (800) / val (183) / calibration (20) / test (201) splits\n- Each example: NL premises (concatenated, ≤3000 chars), NL conclusion, gold label (True/False/Unknown), gold FOL premises (list of strings), gold FOL conclusion (string)\n- Label distribution: True=460, False=351, Unknown=393\n- Calibration subset: first 20 validation examples marked is_calibration_doc=true, split='calibration'\n- Metadata fields: metadata_fold, metadata_split, metadata_is_calibration_doc, metadata_gold_label, metadata_premises_text, metadata_conclusion, metadata_gold_fol_premises (JSON-encoded list), metadata_gold_fol_conclusion, metadata_story_id, metadata_example_id, metadata_task_type, metadata_fold_name\n\n**Dataset 2 — ProofWriter-NL RuleTaker depth-3 (proofwriter_ruletaker_depth3)**\n- Source: tasksource/ruletaker on HuggingFace, config=depth-3ext-NatLang\n- Paper: Clark et al., IJCAI 2020 (RuleTaker); Tafjord et al., ACL Findings 2021 (ProofWriter)\n- 300 balanced examples (150 True / 150 False), all split='test'\n- Each example: NL context (facts + rules ≤3000 chars), NL question as conclusion, True/False gold label\n- No FOL annotations (gold_fol_premises=[], gold_fol_conclusion='')\n- Uses depth-3ext-NatLang config: natural-language surface forms requiring 3-hop deduction chains\n\n### Schema\nAll examples conform to exp_sel_data_out schema:\n- input: \"Premises: {premises_text}\\nConclusion: {conclusion}\"\n- output: gold label string (\"True\", \"False\", or \"Unknown\")\n- metadata_* fields for all provenance and annotation data\n\n### Output Files\n- full_data_out.json: 1,504 examples, 2 datasets (2.7 MB)\n- mini_data_out.json: 6 examples (3 per dataset)\n- preview_data_out.json: 6 examples with strings truncated\n- data.py: reproducible generation script\n- pyproject.toml: pinned dependencies (loguru==0.7.3)\n- metadata.json: dataset provenance sidecar",
+  "out_expected_files": {
+    "script": "data.py",
+    "datasets": [
+      {
+        "full": ["full_data_out.json"],
+        "mini": "mini_data_out.json",
+        "preview": "preview_data_out.json"
+      }
+    ]
+  }
+}

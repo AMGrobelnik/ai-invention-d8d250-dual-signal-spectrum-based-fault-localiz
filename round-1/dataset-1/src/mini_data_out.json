@@ -1,0 +1,116 @@
+{
+  "metadata": {
+    "description": "FOLIO + ProofWriter-NL dataset for Dual-Signal SBFL evaluation",
+    "folio_source": "HannaAbiAkl/FOLIO-KR (mirrors yale-nlp/FOLIO with additional KR notations)",
+    "proofwriter_source": "tasksource/ruletaker config=depth-3ext-NatLang",
+    "total_examples": 1504
+  },
+  "datasets": [
+    {
+      "dataset": "folio",
+      "examples": [
+        {
+          "input": "Premises: Tyga is a rapper. Rappers release rap albums. Tyga released the Well Done 3 album. Rappers are not opera singers.\nConclusion: Well Done 3 is worth listening to.",
+          "output": "Unknown",
+          "metadata_fold": "train",
+          "metadata_split": "train",
+          "metadata_is_calibration_doc": false,
+          "metadata_gold_label": "Unknown",
+          "metadata_premises_text": "Tyga is a rapper. Rappers release rap albums. Tyga released the Well Done 3 album. Rappers are not opera singers.",
+          "metadata_conclusion": "Well Done 3 is worth listening to.",
+          "metadata_gold_fol_premises": "[\"IsRapper(tyga)\", \"\\u2200x \\u2200y ((IsRapper(x) \\u2227 ReleasedAlbum(x, y)) \\u2192 IsRapAlbum(y))\", \"ReleasedAlbum(tyga, wellDone3)\", \"\\u2200x (IsRapper(x) \\u2192 \\u00acIsOperaSinger(x))\"]",
+          "metadata_gold_fol_conclusion": "IsWorthListening(wellDone3)",
+          "metadata_story_id": "36",
+          "metadata_example_id": "106",
+          "metadata_task_type": "classification",
+          "metadata_fold_name": "folio"
+        },
+        {
+          "input": "Premises: All people in this tech company who are consistent and enjoy sticking to their regular routines do not like surprises. People in this tech company who wear the same flannel shirts every day are consistent and enjoy sticking to their regular routines. People in this tech company who do not like shopping for clothes wear the same flannel shirts every day. Old people living in stable homes do not like surprises. People in this tech company who have very high energy and are impulsive like surprises. Mike works in this tech company. If Mike is not a person who wears the same flannel shirts every day, has very high energy, and is impulsive, then Mike either is very consistent and enjoys sticking to his regular routines or does not like surprises.\nConclusion: Mike is an old person living in a stable home.",
+          "output": "Unknown",
+          "metadata_fold": "train",
+          "metadata_split": "train",
+          "metadata_is_calibration_doc": false,
+          "metadata_gold_label": "Unknown",
+          "metadata_premises_text": "All people in this tech company who are consistent and enjoy sticking to their regular routines do not like surprises. People in this tech company who wear the same flannel shirts every day are consistent and enjoy sticking to their regular routines. People in this tech company who do not like shopping for clothes wear the same flannel shirts every day. Old people living in stable homes do not like surprises. People in this tech company who have very high energy and are impulsive like surprises. Mike works in this tech company. If Mike is not a person who wears the same flannel shirts every day, has very high energy, and is impulsive, then Mike either is very consistent and enjoys sticking to his regular routines or does not like surprises.",
+          "metadata_conclusion": "Mike is an old person living in a stable home.",
+          "metadata_gold_fol_premises": "[\"\\u2200x (InThisTechCompany(x) \\u2227 Consistent(x) \\u2227 StickTo(x, theirRegularRoutine) \\u2192 \\u00acLike(x, surprise))\", \"\\u2200x (InThisTechCompany(x) \\u2227 \\u2203y (flannelShirt(y) \\u2227 WearEveryday(x, y)) \\u2192 Consistent(x) \\u2227 StickTo(x, theirRegularRoutine))\", \"\\u2200x (InThisTechCompany(x) \\u2227 \\u00acLikeShoppingFor(x, clothes) \\u2192 \\u2203y (flannelShirt(y) \\u2227 WearEveryday(x, y)))\", \"\\u2200x (InThisTechCompany(x) \\u2227 Old(x) \\u2227 LiveIn(x, stableHome) \\u2192 \\u00acLike(x, surprise))\", \"\\u2200x (InThisTechCompany(x) \\u2227 Have(x, highEnergy) \\u2227 Impulsive(x) \\u2192 \\u00acLike(x, surprise))\", \"InThisTechCompany(mike)\", \"\\u00ac(\\u2203y (flannelShirt(y) \\u2227 WearEveryday(x, y)) \\u2227 Have(mike, highEnergy) \\u2227 Impulsive(mike)) \\u2192 (Consistent(mike) \\u2227 StickTo(mike, theirRegularRoutine)) \\u2295 \\u00acLike(mike, surprise)\"]",
+          "metadata_gold_fol_conclusion": "Old(mike) ∧ LiveIn(mike, stableHome)",
+          "metadata_story_id": "376",
+          "metadata_example_id": "1002",
+          "metadata_task_type": "classification",
+          "metadata_fold_name": "folio"
+        },
+        {
+          "input": "Premises: No trick-shot artist in Yale's varsity team struggles with half court shots. Everyone on Yale's varsity team is someone who struggles with half court shots or who successfully shoots a high percentage of 3-pointers. Everyone on Yale's varsity team who successfully shoots a high percentage of 3-pointers is solid at shooting 2-pointers. No one on Yale's varsity team who is solid at shooting 2-pointers is bad at mid-range shots. Jack is on Yale's varsity team, and he is either a trick-shot artist or he successfully shoots a high percentage of 3-pointers.\nConclusion: Jack is solid at shooting 2-pointers or bad at mid-range shots.",
+          "output": "True",
+          "metadata_fold": "train",
+          "metadata_split": "train",
+          "metadata_is_calibration_doc": false,
+          "metadata_gold_label": "True",
+          "metadata_premises_text": "No trick-shot artist in Yale's varsity team struggles with half court shots. Everyone on Yale's varsity team is someone who struggles with half court shots or who successfully shoots a high percentage of 3-pointers. Everyone on Yale's varsity team who successfully shoots a high percentage of 3-pointers is solid at shooting 2-pointers. No one on Yale's varsity team who is solid at shooting 2-pointers is bad at mid-range shots. Jack is on Yale's varsity team, and he is either a trick-shot artist or he successfully shoots a high percentage of 3-pointers.",
+          "metadata_conclusion": "Jack is solid at shooting 2-pointers or bad at mid-range shots.",
+          "metadata_gold_fol_premises": "[\"\\u2200x ((In(x, yaleSVarsityTeam) \\u2227 TrickShotArtist(x)) \\u2192 \\u00acStruggleAt(x, halfCourtShot))\", \"\\u2200x (In(x, yaleSVarsityTeam) \\u2192 (StruggleAt(x, halfCourtShot) \\u2228 GoodAt(x, threes)))\", \"\\u2200x ((In(x, yaleSVarsityTeam) \\u2227 GoodAt(x, threes)) \\u2192 GoodAt(x, twos))\", \"\\u2200x ((In(x, yaleSVarsityTeam) \\u2227 GoodAt(x, twos)) \\u2192 BadAt(x, midRangeShot))\", \"In(jack, yaleSVarsityTeam) \\u2227 (TrickShotArtist(jack) \\u2295  GoodAt(jack, threes))\"]",
+          "metadata_gold_fol_conclusion": "GoodAt(jack, twos) ∨ BadAt(jack, midRangeShot)",
+          "metadata_story_id": "408",
+          "metadata_example_id": "1135",
+          "metadata_task_type": "classification",
+          "metadata_fold_name": "folio"
+        }
+      ]
+    },
+    {
+      "dataset": "proofwriter_ruletaker_depth3",
+      "examples": [
+        {
+          "input": "Premises: The bear chases the rabbit. The bear is blue. The bear is green. The cat is cold. The rabbit chases the cat. The rabbit is nice. The rabbit visits the bear. If someone chases the cat and the cat visits the rabbit then they visit the cat. If someone visits the cat and the cat is cold then they chase the rabbit. If someone chases the rabbit then the rabbit visits the cat. If someone chases the cat and they chase the rabbit then the cat chases the bear. If someone eats the cat and they chase the bear then the bear eats the cat. If the cat chases the bear then the bear is blue.\nConclusion: The cat does not chase the rabbit.",
+          "output": "True",
+          "metadata_fold": "test",
+          "metadata_split": "test",
+          "metadata_is_calibration_doc": false,
+          "metadata_gold_label": "True",
+          "metadata_premises_text": "The bear chases the rabbit. The bear is blue. The bear is green. The cat is cold. The rabbit chases the cat. The rabbit is nice. The rabbit visits the bear. If someone chases the cat and the cat visits the rabbit then they visit the cat. If someone visits the cat and the cat is cold then they chase the rabbit. If someone chases the rabbit then the rabbit visits the cat. If someone chases the cat and they chase the rabbit then the cat chases the bear. If someone eats the cat and they chase the bear then the bear eats the cat. If the cat chases the bear then the bear is blue.",
+          "metadata_conclusion": "The cat does not chase the rabbit.",
+          "metadata_gold_fol_premises": "[]",
+          "metadata_gold_fol_conclusion": "",
+          "metadata_story_id": "",
+          "metadata_example_id": "0",
+          "metadata_task_type": "classification",
+          "metadata_fold_name": "proofwriter"
+        },
+        {
+          "input": "Premises: Bob is white. Dave is quiet. Fiona is furry. Harry is quiet. If Bob is rough then Bob is furry. All kind things are blue. If something is furry then it is rough. All rough, furry things are young. If something is young then it is kind. Rough, furry things are kind.\nConclusion: Dave is not white.",
+          "output": "True",
+          "metadata_fold": "test",
+          "metadata_split": "test",
+          "metadata_is_calibration_doc": false,
+          "metadata_gold_label": "True",
+          "metadata_premises_text": "Bob is white. Dave is quiet. Fiona is furry. Harry is quiet. If Bob is rough then Bob is furry. All kind things are blue. If something is furry then it is rough. All rough, furry things are young. If something is young then it is kind. Rough, furry things are kind.",
+          "metadata_conclusion": "Dave is not white.",
+          "metadata_gold_fol_premises": "[]",
+          "metadata_gold_fol_conclusion": "",
+          "metadata_story_id": "",
+          "metadata_example_id": "1",
+          "metadata_task_type": "classification",
+          "metadata_fold_name": "proofwriter"
+        },
+        {
+          "input": "Premises: Anne is white. Charlie is quiet. Gary is young. Harry is blue. If something is smart and white then it is blue. All blue things are quiet. All furry, green things are blue. If something is smart then it is furry. If Anne is white then Anne is smart. Young, green things are blue. If Charlie is green and Charlie is young then Charlie is quiet. If something is blue then it is green.\nConclusion: Charlie is quiet.",
+          "output": "True",
+          "metadata_fold": "test",
+          "metadata_split": "test",
+          "metadata_is_calibration_doc": false,
+          "metadata_gold_label": "True",
+          "metadata_premises_text": "Anne is white. Charlie is quiet. Gary is young. Harry is blue. If something is smart and white then it is blue. All blue things are quiet. All furry, green things are blue. If something is smart then it is furry. If Anne is white then Anne is smart. Young, green things are blue. If Charlie is green and Charlie is young then Charlie is quiet. If something is blue then it is green.",
+          "metadata_conclusion": "Charlie is quiet.",
+          "metadata_gold_fol_premises": "[]",
+          "metadata_gold_fol_conclusion": "",
+          "metadata_story_id": "",
+          "metadata_example_id": "2",
+          "metadata_task_type": "classification",
+          "metadata_fold_name": "proofwriter"
+        }
+      ]
+    }
+  ]
+}
