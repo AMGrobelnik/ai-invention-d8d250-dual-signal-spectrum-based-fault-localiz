@@ -1,0 +1,114 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{Han2022,Pan2023}
+\citation{Olausson2023,Ye2022}
+\citation{Madaan2023}
+\citation{Abreu2007}
+\citation{Reps1997}
+\citation{Wang2020}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\citation{Pan2023}
+\citation{Olausson2023}
+\citation{Ishay2023}
+\citation{Madaan2023}
+\citation{Abreu2007}
+\citation{Wang2020}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces End-to-end dual-signal SBFL pipeline for NL-to-FOL knowledge base repair. Stage\nobreakspace  {}1 extracts a Prolog KB from natural language via LLM. Stage\nobreakspace  {}2 generates a localization oracle (yes/no queries used only for repair targeting, not evaluation). Stage\nobreakspace  {}3 runs a stratified coverage spectrum, distinguishing direct-fault predicates (failed to unify) from indirect-fault predicates (unified, sub-goals failed) and harvesting deepest unsatisfied sub-goals. Stage\nobreakspace  {}4 computes dual suspiciousness rankings (Ochiai + sub-goal frequency). Stage\nobreakspace  {}5 performs targeted LLM repair on the top-$K$ suspicious items. Final evaluation uses human-annotated benchmark labels, decoupled from the localization oracle.}}{3}{figure.1}\protected@file@percent }
+\newlabel{fig:pipeline}{{1}{3}{End-to-end dual-signal SBFL pipeline for NL-to-FOL knowledge base repair. Stage~1 extracts a Prolog KB from natural language via LLM. Stage~2 generates a localization oracle (yes/no queries used only for repair targeting, not evaluation). Stage~3 runs a stratified coverage spectrum, distinguishing direct-fault predicates (failed to unify) from indirect-fault predicates (unified, sub-goals failed) and harvesting deepest unsatisfied sub-goals. Stage~4 computes dual suspiciousness rankings (Ochiai + sub-goal frequency). Stage~5 performs targeted LLM repair on the top-$K$ suspicious items. Final evaluation uses human-annotated benchmark labels, decoupled from the localization oracle}{figure.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{3}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Neuro-symbolic reasoning pipelines.}{3}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Iterative LLM refinement.}{3}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Spectrum-Based Fault Localization.}{3}{section*.3}\protected@file@percent }
+\citation{Han2022}
+\citation{Clark2020,Tafjord2021}
+\citation{Wei2022}
+\@writefile{toc}{\contentsline {paragraph}{Benchmark datasets.}{4}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Chain-of-thought reasoning.}{4}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Methods}{4}{section.3}\protected@file@percent }
+\newlabel{sec:methods}{{3}{4}{Methods}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Dual-Signal SBFL Pipeline}{4}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Stage 1: KB Extraction.}{4}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Stage 2: Oracle Generation.}{4}{section*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Stage 3: Stratified Coverage Spectrum.}{5}{section*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Stage 4: Dual Suspiciousness Ranking.}{5}{section*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Stage 5: Targeted Repair.}{5}{section*.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Oracle Calibration Protocol}{5}{subsection.3.2}\protected@file@percent }
+\citation{Clark2020,Tafjord2021}
+\citation{Han2022}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Baselines}{6}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experiments}{6}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Setup}{6}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dataset.}{6}{section*.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Metrics.}{6}{section*.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Statistical tests.}{6}{section*.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Model and cost.}{7}{section*.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Main Results}{7}{subsection.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Overall accuracy, hallucination rate, mean LLM calls, and cost on 150 ProofWriter-NL depth-3 examples.}}{7}{table.1}\protected@file@percent }
+\newlabel{tab:main}{{1}{7}{Overall accuracy, hallucination rate, mean LLM calls, and cost on 150 ProofWriter-NL depth-3 examples}{table.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{Dual-SBFL does not improve overall accuracy.}{7}{section*.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{CoT significantly outperforms all Prolog-based approaches.}{7}{section*.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Corrected Oracle Calibration}{7}{subsection.4.3}\protected@file@percent }
+\newlabel{sec:calibration}{{4.3}{7}{Corrected Oracle Calibration}{subsection.4.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Multi-hop deduction accuracy on 150 ProofWriter-NL depth-3 examples, with 95\% bootstrap confidence intervals (10,000 resamples). Chain-of-thought significantly outperforms all Prolog-based methods (McNemar $p = 0.0005$). Dual-SBFL accuracy ($0.193$) is statistically indistinguishable from one-shot extraction ($0.200$; CI $[-0.033, +0.020]$, Cohen's $h = -0.017$).}}{8}{figure.2}\protected@file@percent }
+\newlabel{fig:accuracy}{{2}{8}{Multi-hop deduction accuracy on 150 ProofWriter-NL depth-3 examples, with 95\% bootstrap confidence intervals (10,000 resamples). Chain-of-thought significantly outperforms all Prolog-based methods (McNemar $p = 0.0005$). Dual-SBFL accuracy ($0.193$) is statistically indistinguishable from one-shot extraction ($0.200$; CI $[-0.033, +0.020]$, Cohen's $h = -0.017$)}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Perturbation-based oracle calibration results (sub-experiment\nobreakspace  {}A). For each of 10 calibration documents, three synthetic errors were injected, and Spearman rank correlation $\rho $ was computed between Ochiai rankings and ground-truth perturbed predicates. Only 4 of 10 documents yielded valid (non-degenerate) correlations. Mean $\rho = 0.261$ across valid documents — positive, confirming Ochiai carries localization signal, but below the pre-registered threshold of $\rho = 0.6$ (dashed red line). The corrected implementation replaces the prior degenerate single-query calibration that yielded $\rho = -0.167$.}}{8}{figure.3}\protected@file@percent }
+\newlabel{fig:oracle_calibration}{{3}{8}{Perturbation-based oracle calibration results (sub-experiment~A). For each of 10 calibration documents, three synthetic errors were injected, and Spearman rank correlation $\rho $ was computed between Ochiai rankings and ground-truth perturbed predicates. Only 4 of 10 documents yielded valid (non-degenerate) correlations. Mean $\rho = 0.261$ across valid documents — positive, confirming Ochiai carries localization signal, but below the pre-registered threshold of $\rho = 0.6$ (dashed red line). The corrected implementation replaces the prior degenerate single-query calibration that yielded $\rho = -0.167$}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Left: multi-hop deduction accuracy stratified by hop depth (1-hop, 2-hop, 3-hop) for dual-SBFL, one-shot, and CoT ($N=150$, main evaluation). Right: KB structural completeness by hop depth (fraction of KBs with no missing predicate failures, $n=30$ per depth, sub-experiment\nobreakspace  {}C). Completeness drops monotonically from $0.467$ at depth\nobreakspace  {}1 to $0.300$ at depth\nobreakspace  {}3, explaining the 0\% accuracy of all Prolog-based methods at depths\nobreakspace  {}2--3. Dual-SBFL achieves $63.3\%$ accuracy at depth\nobreakspace  {}1 where extraction partially succeeds.}}{9}{figure.4}\protected@file@percent }
+\newlabel{fig:hop_depth}{{4}{9}{Left: multi-hop deduction accuracy stratified by hop depth (1-hop, 2-hop, 3-hop) for dual-SBFL, one-shot, and CoT ($N=150$, main evaluation). Right: KB structural completeness by hop depth (fraction of KBs with no missing predicate failures, $n=30$ per depth, sub-experiment~C). Completeness drops monotonically from $0.467$ at depth~1 to $0.300$ at depth~3, explaining the 0\% accuracy of all Prolog-based methods at depths~2--3. Dual-SBFL achieves $63.3\%$ accuracy at depth~1 where extraction partially succeeds}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Hop-Depth Completeness Analysis}{9}{subsection.4.4}\protected@file@percent }
+\newlabel{sec:hopdepth}{{4.4}{9}{Hop-Depth Completeness Analysis}{subsection.4.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Model Capability Experiment}{9}{subsection.4.5}\protected@file@percent }
+\newlabel{sec:model}{{4.5}{9}{Model Capability Experiment}{subsection.4.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces KB structural completeness and SBFL accuracy by hop depth (sub-experiment\nobreakspace  {}C). SBFL accuracy at depths\nobreakspace  {}2--3 was not separately measured due to the near-zero completeness ceiling.}}{10}{table.2}\protected@file@percent }
+\newlabel{tab:hopdepth}{{2}{10}{KB structural completeness and SBFL accuracy by hop depth (sub-experiment~C). SBFL accuracy at depths~2--3 was not separately measured due to the near-zero completeness ceiling}{table.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Oracle model comparison (sub-experiment\nobreakspace  {}B, $N=40$ examples each). GPT-4o-mini as oracle generator achieves marginally higher SBFL accuracy ($0.600$ vs.\ $0.575$) and better perturbation calibration $\rho $ ($-0.143$ vs.\ $-0.249$) compared to Haiku. Both remain far below the pre-registered $\rho = 0.6$ threshold (dashed line), ruling out model scale as the primary binding constraint for oracle quality.}}{10}{figure.5}\protected@file@percent }
+\newlabel{fig:model_comparison}{{5}{10}{Oracle model comparison (sub-experiment~B, $N=40$ examples each). GPT-4o-mini as oracle generator achieves marginally higher SBFL accuracy ($0.600$ vs.\ $0.575$) and better perturbation calibration $\rho $ ($-0.143$ vs.\ $-0.249$) compared to Haiku. Both remain far below the pre-registered $\rho = 0.6$ threshold (dashed line), ruling out model scale as the primary binding constraint for oracle quality}{figure.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Oracle model comparison on 40 examples (sub-experiment\nobreakspace  {}B).}}{10}{table.3}\protected@file@percent }
+\newlabel{tab:model}{{3}{10}{Oracle model comparison on 40 examples (sub-experiment~B)}{table.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Strict and fuzzy atomic fact recall for dual-SBFL, one-shot, and self-refine ($N=150$). Fuzzy recall improvement for dual-SBFL vs.\ one-shot is $+0.089$ (bootstrap 95\% CI $[+0.032, +0.148]$, statistically significant). Strict recall improvement ($+0.031$) has CI $[-0.012, +0.074]$, which includes zero. Sub-goal harvesting successfully adds missing predicates to the KB (fuzzy recall gain) even when proof-level accuracy does not improve.}}{11}{figure.6}\protected@file@percent }
+\newlabel{fig:recall}{{6}{11}{Strict and fuzzy atomic fact recall for dual-SBFL, one-shot, and self-refine ($N=150$). Fuzzy recall improvement for dual-SBFL vs.\ one-shot is $+0.089$ (bootstrap 95\% CI $[+0.032, +0.148]$, statistically significant). Strict recall improvement ($+0.031$) has CI $[-0.012, +0.074]$, which includes zero. Sub-goal harvesting successfully adds missing predicates to the KB (fuzzy recall gain) even when proof-level accuracy does not improve}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Atomic Fact Recall with Confidence Intervals}{11}{subsection.4.6}\protected@file@percent }
+\newlabel{sec:recall}{{4.6}{11}{Atomic Fact Recall with Confidence Intervals}{subsection.4.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{11}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Why the Method Partially Fails: Two Distinct Bottlenecks}{11}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Bottleneck 1: Extraction quality ceiling at depth $\geq $\nobreakspace  {}2.}{11}{section*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Bottleneck 2: Oracle signal strength.}{12}{section*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Positive Findings}{12}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Sub-goal harvesting improves recall.}{12}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Targeted repair reduces hallucination relative to self-refine.}{12}{section*.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{SBFL works at depth 1.}{12}{section*.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Partial Confirmation of Sub-Hypotheses}{12}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Limitations}{13}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Implications for Future Work}{13}{subsection.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Extraction quality as the first-class problem.}{13}{section*.22}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Oracle quality via document-derived queries.}{13}{section*.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Hybrid CoT-Symbolic systems.}{13}{section*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{13}{section.6}\protected@file@percent }
+\bibstyle{plainnat}
+\bibdata{references}
+\bibcite{Ye2022}{{1}{2022}{{Ye and Durrett}}{{}}}
+\bibcite{Wei2022}{{2}{2022}{{Wei et~al.}}{{Wei, Wang, Schuurmans, Bosma, Ichter, Xia, Chi, Le, and Zhou}}}
+\bibcite{Han2022}{{3}{2022}{{Han et~al.}}{{Han, Schoelkopf, Zhao, Qi, Riddell, Benson, Sun, Zubova, Qiao, Burtell, Peng, Fan, Liu, Wong, Sailor, Ni, Nan, Kasai, Yu, Zhang, Joty, Fabbri, Kryscinski, Lin, Xiong, and Radev}}}
+\bibcite{Pan2023}{{4}{2023}{{Pan et~al.}}{{Pan, Albalak, Wang, and Wang}}}
+\bibcite{Wang2020}{{5}{2020}{{Wang et~al.}}{{Wang, Xiong, Gao, and Wang}}}
+\bibcite{Reps1997}{{6}{1997}{{Reps et~al.}}{{Reps, Ball, Das, and Larus}}}
+\bibcite{Abreu2007}{{7}{2007}{{Abreu et~al.}}{{Abreu, Zoeteweij, and van Gemund}}}
+\bibcite{Ishay2023}{{8}{2023}{{Ishay et~al.}}{{Ishay, Yang, and Lee}}}
+\bibcite{Clark2020}{{9}{2020}{{Clark et~al.}}{{Clark, Tafjord, and Richardson}}}
+\bibcite{Madaan2023}{{10}{2023}{{Madaan et~al.}}{{Madaan, Tandon, Gupta, Hallinan, Gao, Wiegreffe, Alon, Dziri, Prabhumoye, Yang, Welleck, Majumder, Gupta, Yazdanbakhsh, and Clark}}}
+\bibcite{Tafjord2021}{{11}{2021}{{Tafjord et~al.}}{{Tafjord, Dalvi, and Clark}}}
+\bibcite{Olausson2023}{{12}{2023}{{Olausson et~al.}}{{Olausson, Gu, Lipkin, Zhang, Solar-Lezama, Tenenbaum, and Levy}}}
+\gdef \@abspage@last{15}

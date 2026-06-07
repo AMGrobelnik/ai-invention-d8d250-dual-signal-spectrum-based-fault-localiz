@@ -1,0 +1,91 @@
+# AI Invention Research Repository
+
+This repository contains artifacts from an AI-generated research project.
+
+## Research Paper
+
+[![Download PDF](https://img.shields.io/badge/Download-PDF-red)](https://cdn.jsdelivr.net/gh/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz@main/paper.pdf) [![LaTeX Source](https://img.shields.io/badge/LaTeX-Source-orange)](https://github.com/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/tree/main/paper_latex)
+
+## Artifacts
+
+### Research
+
+| Title | Demo | Source Code |
+|-------|------|-------------|
+| [SBFL, SWI-Prolog Tracing, NL-to-FOL Pipelines, and Benchmark...](https://github.com/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/tree/main/round-1/research-1) | [![View Research](https://img.shields.io/badge/View-Research-green)](https://github.com/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/blob/main/round-1/research-1/demo/research_demo.md) | [![Source Code](https://img.shields.io/badge/Source_Code-2962FF)](https://github.com/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/tree/main/round-1/research-1/src) |
+
+### Datasets
+
+| Title | Demo | Source Code |
+|-------|------|-------------|
+| [FOLIO + ProofWriter-NL Dataset for Dual-Signal SBFL Evaluati...](https://github.com/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/tree/main/round-1/dataset-1) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/blob/main/round-1/dataset-1/demo/data_code_demo.ipynb) | [![Source Code](https://img.shields.io/badge/Source_Code-2962FF)](https://github.com/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/tree/main/round-1/dataset-1/src) |
+
+### Experiments
+
+| Title | Demo | Source Code |
+|-------|------|-------------|
+| [Dual-Signal SBFL Pipeline for NL-to-FOL Prolog KB Repair on ...](https://github.com/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/tree/main/round-1/experiment-1) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/blob/main/round-1/experiment-1/demo/method_code_demo.ipynb) | [![Source Code](https://img.shields.io/badge/Source_Code-2962FF)](https://github.com/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/tree/main/round-1/experiment-1/src) |
+| [Dual-Signal SBFL: Perturbation Calibration, Stronger Oracle,...](https://github.com/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/tree/main/round-2/experiment-1) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/blob/main/round-2/experiment-1/demo/method_code_demo.ipynb) | [![Source Code](https://img.shields.io/badge/Source_Code-2962FF)](https://github.com/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/tree/main/round-2/experiment-1/src) |
+
+### Evaluations
+
+| Title | Demo | Source Code |
+|-------|------|-------------|
+| [Dual-Signal SBFL vs. Baselines: Statistical Evaluation on Pr...](https://github.com/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/tree/main/round-1/evaluation-1) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/blob/main/round-1/evaluation-1/demo/eval_code_demo.ipynb) | [![Source Code](https://img.shields.io/badge/Source_Code-2962FF)](https://github.com/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/tree/main/round-1/evaluation-1/src) |
+| [Rigorous Statistical Evaluation of Dual-Signal SBFL on Proof...](https://github.com/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/tree/main/round-2/evaluation-1) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/blob/main/round-2/evaluation-1/demo/eval_code_demo.ipynb) | [![Source Code](https://img.shields.io/badge/Source_Code-2962FF)](https://github.com/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz/tree/main/round-2/evaluation-1/src) |
+
+## Repository Structure
+
+Artifacts are grouped by the round of invention that produced them. Each
+artifact has its own folder with source code and a self-contained demo:
+
+```
+.
+├── round-1/                         # One folder per round of invention
+│   ├── experiment-1/
+│   │   ├── README.md                # What this artifact is
+│   │   ├── src/                     # Full workspace from execution
+│   │   │   ├── method.py            # Main implementation
+│   │   │   ├── method_out.json      # Full output data
+│   │   │   └── ...                  # All execution artifacts
+│   │   └── demo/                    # Self-contained demo
+│   │       └── method_code_demo.ipynb # Colab-ready notebook (code + data inlined)
+│   ├── dataset-1/
+│   │   ├── src/
+│   │   └── demo/
+│   └── evaluation-1/
+│       ├── src/
+│       └── demo/
+├── paper.pdf                        # Research paper
+├── paper_latex/                     # LaTeX source files
+└── README.md
+```
+
+## Running Notebooks
+
+### Option 1: Google Colab (Recommended)
+
+Click the "Open in Colab" badges above to run notebooks directly in your browser.
+No installation required!
+
+### Option 2: Local Jupyter
+
+```bash
+# Clone the repo
+git clone https://github.com/AMGrobelnik/ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz
+cd ai-invention-d8d250-dual-signal-spectrum-based-fault-localiz
+
+# Install dependencies
+pip install jupyter
+
+# Run any artifact's demo notebook
+jupyter notebook <artifact_folder>/demo/
+```
+
+## Source Code
+
+The original source files are in each artifact's `src/` folder.
+These files may have external dependencies - use the demo notebooks for a self-contained experience.
+
+---
+*Generated by AI Inventor Pipeline - Automated Research Generation*
