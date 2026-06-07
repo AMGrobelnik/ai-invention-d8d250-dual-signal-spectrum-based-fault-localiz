@@ -1,0 +1,227 @@
+{
+  "metadata": {
+    "evaluation_name": "dual_sbfl_rigorous_eval_iter2",
+    "main_dataset": "proofwriter_ruletaker_depth3",
+    "n_examples": 3,
+    "folio_note": "FOLIO evaluation was preliminary (N=3, incomplete run); excluded from main results. Main evaluation is ProofWriter-NL depth-3.",
+    "bootstrap_n_resamples": 10000,
+    "calibration_n_docs": 0,
+    "model": "meta-llama/llama-3.1-8b-instruct",
+    "dataset_disambiguation": {
+      "folio": "PRELIMINARY ONLY \u2014 3 examples, incomplete run, NOT included in main metrics",
+      "proofwriter_ruletaker_depth3": "MAIN EVALUATION \u2014 N=3 examples, all results reported here"
+    },
+    "accuracy_by_method": {
+      "dual_sbfl": 0.3333333333333333,
+      "one_shot": 0.6666666666666666,
+      "cot": 0.3333333333333333,
+      "self_refine": 0.3333333333333333,
+      "flat_sbfl": 0.3333333333333333
+    },
+    "bootstrap_cis_pairwise": {
+      "dual_sbfl_vs_one_shot": {
+        "ci_lo": -1.0,
+        "ci_hi": 0.0,
+        "excludes_zero": false
+      },
+      "dual_sbfl_vs_self_refine": {
+        "ci_lo": 0.0,
+        "ci_hi": 0.0,
+        "excludes_zero": false
+      },
+      "dual_sbfl_vs_flat_sbfl": {
+        "ci_lo": -1.0,
+        "ci_hi": 1.0,
+        "excludes_zero": false
+      },
+      "dual_sbfl_vs_cot": {
+        "ci_lo": -1.0,
+        "ci_hi": 1.0,
+        "excludes_zero": false
+      }
+    },
+    "cohens_h": {
+      "dual_sbfl_vs_one_shot": 0.6796738189082441,
+      "dual_sbfl_vs_self_refine": 0.0,
+      "dual_sbfl_vs_flat_sbfl": 0.0,
+      "dual_sbfl_vs_cot": 0.0
+    },
+    "hallucination_rates": {
+      "dual_sbfl_mean": 0.041666666666666664,
+      "one_shot_mean": 0.041666666666666664,
+      "diff_ci_95": [
+        0.0,
+        0.0
+      ]
+    },
+    "precision_recall": {
+      "dual_sbfl_strict_recall": 0.3650326797385621,
+      "one_shot_strict_recall": 0.3650326797385621,
+      "self_refine_strict_recall": 0.3650326797385621,
+      "dual_sbfl_fuzzy_recall": 0.3650326797385621,
+      "one_shot_fuzzy_recall": 0.3650326797385621,
+      "self_refine_fuzzy_recall": 0.3650326797385621,
+      "dual_sbfl_strict_precision": 0.9107142857142857,
+      "one_shot_strict_precision": 0.0,
+      "self_refine_strict_precision": 0.0,
+      "dual_sbfl_fuzzy_precision": 0.9107142857142857,
+      "one_shot_fuzzy_precision": 0.0,
+      "self_refine_fuzzy_precision": 0.0
+    },
+    "recall_bootstrap_cis": {
+      "dual_sbfl_vs_one_shot_strict_recall": {
+        "ci_lo": 0.0,
+        "ci_hi": 0.0
+      },
+      "dual_sbfl_vs_self_refine_strict_recall": {
+        "ci_lo": 0.0,
+        "ci_hi": 0.0
+      },
+      "dual_sbfl_vs_one_shot_fuzzy_recall": {
+        "ci_lo": 0.0,
+        "ci_hi": 0.0
+      },
+      "dual_sbfl_vs_self_refine_fuzzy_recall": {
+        "ci_lo": 0.0,
+        "ci_hi": 0.0
+      }
+    },
+    "mean_llm_calls_per_doc": {
+      "dual_sbfl": 8.666666666666666,
+      "one_shot": 1.0,
+      "cot": 1.0,
+      "self_refine": 6.0,
+      "flat_sbfl": 2.0
+    },
+    "calibration": {
+      "mean_rho": 0.0,
+      "per_doc_rho": [],
+      "validity": "INVALID",
+      "threshold": 0.6,
+      "note": "N=10 docs; no p-values reported (n=10 makes t-test p-values meaningless)"
+    },
+    "hop_depth_accuracy": {
+      "3": {
+        "dual_sbfl": 0.3333333333333333,
+        "one_shot": 0.6666666666666666,
+        "cot": 0.3333333333333333,
+        "self_refine": 0.3333333333333333,
+        "flat_sbfl": 0.3333333333333333,
+        "n": 3
+      }
+    },
+    "kb_completeness_by_depth": {
+      "1": {
+        "n": 0
+      },
+      "2": {
+        "n": 0
+      },
+      "3": {
+        "n": 3,
+        "completeness_rate": 1.0,
+        "repair_rate": 1.0
+      }
+    },
+    "figures": {
+      "fig1": "fig1_accuracy_ci.png",
+      "fig2": "fig2_hallucination.png",
+      "fig3": "fig3_efficiency.png",
+      "fig4": "fig4_hop_depth_accuracy.png",
+      "fig5": "fig5_calibration_rho.png",
+      "fig6": "fig6_kb_completeness.png",
+      "fig7": "fig7_strict_vs_fuzzy_recall_ci.png"
+    },
+    "total_cost_usd": 0.001113805,
+    "total_llm_calls": 56
+  },
+  "results": [
+    {
+      "input": "Premises: The bear chases the rabbit. The bear is blue. The bear is green. The cat is cold. The rabbit chases the cat. The rabbit is nice. The rabbit visits the bear. If someone chases the cat and the cat visits the rabbit then they visit the cat. If someone visits the cat and the cat is cold then they chase the rabbit. If someone chases the rabbit then the rabbit visits the cat. If someone chases the cat and they chase the rabbit then the cat chases the bear. If someone eats the cat and they chase the bear then the bear eats the cat. If the cat chases the bear then the bear is blue.\nConclusion: The cat does not chase the rabbit.",
+      "output": "True",
+      "predict_dual_sbfl": "False",
+      "predict_one_shot": "False",
+      "predict_cot": "Uncertain",
+      "predict_self_refine": "False",
+      "predict_flat_sbfl": "False",
+      "eval_correct_dual_sbfl": 0.0,
+      "eval_correct_one_shot": 0.0,
+      "eval_correct_cot": 0.0,
+      "eval_correct_self_refine": 0.0,
+      "eval_correct_flat_sbfl": 0.0,
+      "eval_hallucination_dual_sbfl": 0.0,
+      "eval_hallucination_one_shot": 0.0,
+      "eval_hop_depth": 3.0,
+      "eval_kb_size_dual": 38.0,
+      "eval_num_repairs_dual": 3.0,
+      "eval_strict_recall_dual_sbfl": 0.4117647058823529,
+      "eval_fuzzy_recall_dual_sbfl": 0.4117647058823529,
+      "eval_strict_recall_one_shot": 0.4117647058823529,
+      "eval_fuzzy_recall_one_shot": 0.4117647058823529,
+      "metadata_example_id": "0",
+      "metadata_conclusion": "The cat does not chase the rabbit.",
+      "metadata_ochiai_top5": "[]",
+      "metadata_subgoal_top5": "[[\"chase\", 1], [\"bear\", 1], [\"visit\", 1], [\"rabbit\", 1]]",
+      "metadata_cumulative_cost_usd": "0.0005",
+      "metadata_llm_calls": "19"
+    },
+    {
+      "input": "Premises: Bob is white. Dave is quiet. Fiona is furry. Harry is quiet. If Bob is rough then Bob is furry. All kind things are blue. If something is furry then it is rough. All rough, furry things are young. If something is young then it is kind. Rough, furry things are kind.\nConclusion: Dave is not white.",
+      "output": "True",
+      "predict_dual_sbfl": "True",
+      "predict_one_shot": "True",
+      "predict_cot": "Uncertain",
+      "predict_self_refine": "True",
+      "predict_flat_sbfl": "False",
+      "eval_correct_dual_sbfl": 1.0,
+      "eval_correct_one_shot": 1.0,
+      "eval_correct_cot": 0.0,
+      "eval_correct_self_refine": 1.0,
+      "eval_correct_flat_sbfl": 0.0,
+      "eval_hallucination_dual_sbfl": 0.0,
+      "eval_hallucination_one_shot": 0.0,
+      "eval_hop_depth": 3.0,
+      "eval_kb_size_dual": 55.0,
+      "eval_num_repairs_dual": 3.0,
+      "eval_strict_recall_dual_sbfl": 0.3333333333333333,
+      "eval_fuzzy_recall_dual_sbfl": 0.3333333333333333,
+      "eval_strict_recall_one_shot": 0.3333333333333333,
+      "eval_fuzzy_recall_one_shot": 0.3333333333333333,
+      "metadata_example_id": "1",
+      "metadata_conclusion": "Dave is not white.",
+      "metadata_ochiai_top5": "[[\"is_rough\", 1.0]]",
+      "metadata_subgoal_top5": "[[\"kind\", 1], [\"something\", 1], [\"rough\", 1]]",
+      "metadata_cumulative_cost_usd": "0.0008",
+      "metadata_llm_calls": "19"
+    },
+    {
+      "input": "Premises: Anne is white. Charlie is quiet. Gary is young. Harry is blue. If something is smart and white then it is blue. All blue things are quiet. All furry, green things are blue. If something is smart then it is furry. If Anne is white then Anne is smart. Young, green things are blue. If Charlie is green and Charlie is young then Charlie is quiet. If something is blue then it is green.\nConclusion: Charlie is quiet.",
+      "output": "True",
+      "predict_dual_sbfl": "False",
+      "predict_one_shot": "True",
+      "predict_cot": "True",
+      "predict_self_refine": "False",
+      "predict_flat_sbfl": "True",
+      "eval_correct_dual_sbfl": 0.0,
+      "eval_correct_one_shot": 1.0,
+      "eval_correct_cot": 1.0,
+      "eval_correct_self_refine": 0.0,
+      "eval_correct_flat_sbfl": 1.0,
+      "eval_hallucination_dual_sbfl": 0.125,
+      "eval_hallucination_one_shot": 0.125,
+      "eval_hop_depth": 3.0,
+      "eval_kb_size_dual": 19.0,
+      "eval_num_repairs_dual": 2.0,
+      "eval_strict_recall_dual_sbfl": 0.35,
+      "eval_fuzzy_recall_dual_sbfl": 0.35,
+      "eval_strict_recall_one_shot": 0.35,
+      "eval_fuzzy_recall_one_shot": 0.35,
+      "metadata_example_id": "2",
+      "metadata_conclusion": "Charlie is quiet.",
+      "metadata_ochiai_top5": "[]",
+      "metadata_subgoal_top5": "[[\"furry\", 1], [\"gary\", 1]]",
+      "metadata_cumulative_cost_usd": "0.0011",
+      "metadata_llm_calls": "18"
+    }
+  ]
+}
